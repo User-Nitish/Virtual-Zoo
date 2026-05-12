@@ -25,13 +25,17 @@
     @include('partials.navbar')
 
     <!-- Main Content -->
-    <main class="container my-4">
+    <main>
         @if(session('success'))
-            <x-alert type="success" :message="session('success')" />
+            <div class="container mt-4">
+                <x-alert type="success" :message="session('success')" />
+            </div>
         @endif
 
         @if(session('error'))
-            <x-alert type="danger" :message="session('error')" />
+            <div class="container mt-4">
+                <x-alert type="danger" :message="session('error')" />
+            </div>
         @endif
 
         @yield('content')
