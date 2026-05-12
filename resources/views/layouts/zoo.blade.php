@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Zoo Explorer</title>
+    <title>Neo Apex Virtual Zoo Explorer</title>
     
     <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -34,7 +34,7 @@
     
     <!-- Modern Pill Navbar -->
     <nav class="fixed-top glass-nav py-3 px-4 m-3 rounded-pill shadow-sm d-flex justify-content-between align-items-center mx-auto" style="max-width: 1200px; z-index: 1000;">
-        <a href="{{ route('home') }}" class="marker-title fs-3 text-teal mb-0 text-decoration-none">Virtual<span class="text-yellow">Zoo</span></a>
+        <a href="{{ route('home') }}" class="marker-title fs-3 text-teal mb-0 text-decoration-none">Neo Apex <span class="text-yellow">Virtual Zoo</span></a>
         
         <div class="d-none d-md-flex gap-4">
             <a href="{{ route('home') }}" class="nav-link fw-bold text-dark hover-teal">Journey</a>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Into the Wild - Virtual Zoo')
+@section('title', 'Into the Wild - Neo Apex Virtual Zoo')
 
 @section('content')
 

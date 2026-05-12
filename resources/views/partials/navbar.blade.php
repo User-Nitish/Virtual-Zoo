@@ -6,7 +6,7 @@
                 <div class="bg-yellow rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
                     <i class="fa-solid fa-paw text-plum" style="font-size: 0.9rem;"></i>
                 </div>
-                <span class="marker-title text-plum mb-0" style="font-size: 1.75rem; letter-spacing: 1px; line-height: 1;">VIRTUAL ZOO</span>
+                <span class="marker-title text-plum mb-0" style="font-size: 1.75rem; letter-spacing: 1px; line-height: 1;">NEO APEX VIRTUAL ZOO</span>
             </a>
             
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

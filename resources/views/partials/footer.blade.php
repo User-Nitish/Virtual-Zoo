@@ -8,7 +8,7 @@
             <div class="col-lg-5 col-md-12">
                 <div class="mb-4">
                     <h2 class="marker-title text-white mb-3 d-flex align-items-center" style="font-size: 2.8rem;">
-                        <i class="fa-solid fa-paw me-3 text-yellow"></i>Virtual Zoo
+                        <i class="fa-solid fa-paw me-3 text-yellow"></i>Neo Apex Virtual Zoo
                     </h2>
                     <p class="text-white-50 fs-5 mb-4" style="max-width: 450px; line-height: 1.8;">
                         Exploring the boundaries of biological education. Join our interactive journey through the world's most magnificent habitats.
@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <p class="mb-0 text-white-50 small">
-                        © {{ date('Y') }} Virtual Zoo Modern Wildlife. Built for the future of conservation.
+                        © {{ date('Y') }} Neo Apex Virtual Zoo Modern Wildlife. Built for the future of conservation.
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end mt-2 mt-md-0">
