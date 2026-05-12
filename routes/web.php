@@ -8,7 +8,11 @@ use App\Http\Controllers\AdminController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Modern Zoo Consolidated Routes
 Route::get('/directory', [AnimalController::class, 'directory'])->name('directory');
+Route::get('/modern-directory', [AnimalController::class, 'directory'])->name('modern.directory');
+Route::view('/tour', 'tour')->name('tour');
+Route::view('/modern-webcams', 'zoo.webcams')->name('modern.webcams');
 
 // Bootstrap Test Route
 Route::view('/test', 'test')->name('test');
@@ -22,4 +26,8 @@ Route::prefix('admin')->group(function () {
     
     // Resource route for all Category CRUD operations
     Route::resource('categories', CategoryController::class);
+
+    // Welfare Tracking Routes
+    Route::get('/welfare', [\App\Http\Controllers\WelfareController::class, 'index'])->name('admin.welfare');
+    Route::patch('/welfare/{animal}', [\App\Http\Controllers\WelfareController::class, 'update'])->name('admin.welfare.update');
 });

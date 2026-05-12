@@ -24,6 +24,18 @@ class AdminController extends Controller
         // Fetch recently added animals for the dashboard table
         $recentAnimals = Animal::with('category')->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('totalAnimals', 'totalCategories', 'totalImages', 'recentAnimals'));
+        // Data for Charts: Animal counts per category
+        $categoriesData = Category::withCount('animals')->get();
+        $chartLabels = $categoriesData->pluck('name');
+        $chartValues = $categoriesData->pluck('animals_count');
+
+        return view('admin.dashboard', compact(
+            'totalAnimals', 
+            'totalCategories', 
+            'totalImages', 
+            'recentAnimals',
+            'chartLabels',
+            'chartValues'
+        ));
     }
 }
