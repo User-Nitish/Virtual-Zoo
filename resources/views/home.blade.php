@@ -25,7 +25,9 @@
                     Step into a hidden world of magnificent creatures and untouched beauty. Your interactive journey into the heart of nature begins here.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="{{ route('directory') }}" class="btn-zoo shadow-lg px-5 py-3">Explore Archive</a>
+                    <a href="{{ route('tour') }}" class="btn-zoo shadow-lg px-5 py-3">
+                        <i class="fa-solid fa-map me-2"></i> Take a Tour
+                    </a>
                     <a href="{{ route('modern.webcams') }}" class="btn-zoo btn-zoo-plum shadow-lg px-5 py-3">
                         <i class="fa-solid fa-video me-2"></i> Live Cams
                     </a>
@@ -159,7 +161,7 @@
     <div class="container py-5 text-center">
         <div class="mb-5" data-aos="fade-up">
             <h2 class="marker-title text-teal" style="font-size: 4rem; line-height: 0.8;">KINGDOMS</h2>
-            <p class="fs-5 text-muted mt-2">Explore the biological archives by species classification</p>
+            <p class="fs-5 text-muted mt-2">Explore the biological kingdoms by species classification</p>
         </div>
 
         <div class="row g-4 justify-content-center">

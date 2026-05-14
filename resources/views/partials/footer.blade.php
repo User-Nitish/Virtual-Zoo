@@ -29,7 +29,7 @@
                 <h4 class="marker-title text-yellow mb-4" style="font-size: 1.6rem; letter-spacing: 1px;">Navigation</h4>
                 <ul class="list-unstyled">
                     <li class="mb-3"><a href="{{ route('home') }}" class="footer-nav-link">The Wild Path</a></li>
-                    <li class="mb-3"><a href="{{ route('directory') }}" class="footer-nav-link">Species Archive</a></li>
+                    <li class="mb-3"><a href="{{ route('tour') }}" class="footer-nav-link">Interactive Tour</a></li>
                     <li class="mb-3"><a href="{{ route('admin.dashboard') }}" class="footer-nav-link">Curator Portal</a></li>
                     <li class="mb-3"><a href="#" class="footer-nav-link">Member Dossier</a></li>
                 </ul>

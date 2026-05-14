@@ -11,6 +11,10 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Pannellum 360 Viewer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
     <style>
         body {
             overflow-x: hidden;
@@ -74,6 +78,65 @@
             padding: 3rem;
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
+
+        /* 360 Viewer Overlay */
+        #panorama-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #panorama-container {
+            width: 90vw;
+            height: 80vh;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+
+        .close-panorama {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: transform 0.3s;
+        }
+
+        .close-panorama:hover {
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        .panorama-btn {
+            background: var(--zoo-yellow);
+            color: var(--zoo-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panorama-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -124,6 +187,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Witness the Silent Guardians of the rainforest in their natural state.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'The Deep Canopy')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
@@ -158,6 +225,10 @@
                                 <div style="width: 3px; height: 50px; background-color: rgba(0,0,0,0.3);" class="me-4"></div>
                                 <p class="text-dark mb-0 fs-5 fw-bold">Stand amidst the greatest terrestrial journey on the planet.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'Golden Plains')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -182,6 +253,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Brave the ultimate test of endurance and devotion.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/jure-poglacnik-mcb-2.jpg', 'Frozen Expanse')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
@@ -216,6 +291,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.3);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Respect the profound silence before the strike.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Jungle Royalty')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -240,6 +319,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Conquer the clouds and discover mountain sentinels.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'High Peaks')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
@@ -274,6 +357,10 @@
                                 <div style="width: 3px; height: 50px; background-color: rgba(0,0,0,0.3);" class="me-4"></div>
                                 <p class="text-dark mb-0 fs-5 fw-bold">Observe the incredible social bonds of our closest relatives.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'The Silverback')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -298,6 +385,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Swim with the great white sharks in perfect silence.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/jure-poglacnik-mcb-2.jpg', 'Ocean Depths')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
@@ -332,6 +423,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.3);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Listen to the chorus of the scarlet macaws.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Canopy Kings')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -356,6 +451,10 @@
                                 <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
                                 <p class="text-white mb-0 fs-5 fw-medium">Encounter the majestic grizzly bear in its domain.</p>
                             </div>
+
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'Forest Giants')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
@@ -391,6 +490,10 @@
                                 <p class="text-dark mb-0 fs-5 fw-bold">Come face to face with the ancient Komodo Dragon.</p>
                             </div>
                             
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Desert Dragons')">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            </button>
+                            
                             <div class="mt-4">
                                  <a href="{{ route('home') }}" class="btn-zoo bg-plum text-white text-decoration-none shadow-lg px-5 py-3 fs-5 fw-bold rounded-pill">Complete Your Journey</a>
                             </div>
@@ -400,6 +503,14 @@
             </div>
         </section>
 
+    </div>
+
+    <!-- 360 Panorama Overlay -->
+    <div id="panorama-overlay">
+        <i class="fa-solid fa-xmark close-panorama" onclick="closePanorama()"></i>
+        <h2 id="panorama-title" class="marker-title text-white mb-4" style="font-size: 3rem;"></h2>
+        <div id="panorama-container"></div>
+        <p class="text-white-50 mt-3"><i class="fa-solid fa-mouse me-2"></i>Drag to explore the habitat in 360°</p>
     </div>
 
     <!-- GSAP Scripts -->
@@ -489,6 +600,41 @@
                 ease: "power1.inOut"
             });
         });
+
+        // 360 Panorama Logic
+        let viewer = null;
+
+        function openPanorama(imageUrl, title) {
+            const overlay = document.getElementById('panorama-overlay');
+            const titleElem = document.getElementById('panorama-title');
+            
+            titleElem.innerText = title;
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            if (viewer) {
+                viewer.destroy();
+            }
+
+            viewer = pannellum.viewer('panorama-container', {
+                "type": "equirectangular",
+                "panorama": imageUrl,
+                "autoLoad": true,
+                "compass": false,
+                "mouseZoom": false
+            });
+        }
+
+        function closePanorama() {
+            const overlay = document.getElementById('panorama-overlay');
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            if (viewer) {
+                viewer.destroy();
+                viewer = null;
+            }
+        }
     </script>
 </body>
 </html>

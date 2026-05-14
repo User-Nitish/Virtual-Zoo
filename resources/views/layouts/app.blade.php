@@ -18,10 +18,12 @@
 
     <!-- AOS Animation Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
     <!-- 100% Bulletproof Fixed Background -->
     <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -9999; pointer-events: none; background-color: #ffffff; background-image: radial-gradient(circle at 15% 15%, rgba(241, 178, 0, 0.3) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(0, 134, 145, 0.25) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(129, 56, 97, 0.2) 0%, transparent 50%);"></div>
+
 
     <!-- Navbar Partial -->
     @include('partials.navbar')
@@ -58,5 +60,6 @@
             });
         });
     </script>
+    @stack('scripts')
 </body>
 </html>
