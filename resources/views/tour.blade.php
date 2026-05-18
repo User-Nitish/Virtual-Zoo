@@ -188,7 +188,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Witness the Silent Guardians of the rainforest in their natural state.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'The Deep Canopy')">
+                            <button class="panorama-btn mt-4" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e1/Rainforest_trail_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'The Deep Canopy')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -226,7 +226,7 @@
                                 <p class="text-dark mb-0 fs-5 fw-bold">Stand amidst the greatest terrestrial journey on the planet.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'Golden Plains')">
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/6/60/Grasslands_sunset_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Golden Plains')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -254,7 +254,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Brave the ultimate test of endurance and devotion.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/jure-poglacnik-mcb-2.jpg', 'Frozen Expanse')">
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e5/Snowy_field_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Frozen Expanse')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -292,7 +292,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Respect the profound silence before the strike.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Jungle Royalty')">
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/1/18/Forest_cave_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Jungle Royalty')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -320,7 +320,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Conquer the clouds and discover mountain sentinels.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'High Peaks')">
+                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/9/91/Mountain_peak_02_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'High Peaks')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -358,7 +358,7 @@
                                 <p class="text-dark mb-0 fs-5 fw-bold">Observe the incredible social bonds of our closest relatives.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'The Silverback')">
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/1/13/Kohama_Island%2C_Mangrove_360-degree.jpg', 'The Silverback')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -386,7 +386,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Swim with the great white sharks in perfect silence.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/jure-poglacnik-mcb-2.jpg', 'Ocean Depths')">
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/d/d3/Lady_Elliot_Island_SVII.jpg', 'Ocean Depths')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -424,7 +424,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Listen to the chorus of the scarlet macaws.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Canopy Kings')">
+                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/8/87/Spooky_bamboo_morning_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Canopy Kings')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -452,7 +452,7 @@
                                 <p class="text-white mb-0 fs-5 fw-medium">Encounter the majestic grizzly bear in its domain.</p>
                             </div>
 
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://pannellum.org/images/cerro-toco-0.jpg', 'Forest Giants')">
+                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/d/d3/El_Teide_Tenerife_Photosphere.jpg', 'Forest Giants')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                         </div>
@@ -490,7 +490,7 @@
                                 <p class="text-dark mb-0 fs-5 fw-bold">Come face to face with the ancient Komodo Dragon.</p>
                             </div>
                             
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://pannellum.org/images/alma.jpg', 'Desert Dragons')">
+                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e3/Grand_Canyon_National_Park-_Desert_View_Point_and_Watchtower.jpg', 'Desert Dragons')">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
                             </button>
                             
@@ -620,7 +620,8 @@
                 "type": "equirectangular",
                 "panorama": imageUrl,
                 "autoLoad": true,
-                "compass": false,
+                "compass": true,
+                "showZoomCtrl": true,
                 "mouseZoom": false
             });
         }

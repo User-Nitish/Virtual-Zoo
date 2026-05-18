@@ -11,6 +11,9 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         body { 
             background-color: var(--zoo-light); 
@@ -33,7 +36,7 @@
 <body class="antialiased">
     
     <!-- Modern Pill Navbar -->
-    <nav class="fixed-top glass-nav py-3 px-4 m-3 rounded-pill shadow-sm d-flex justify-content-between align-items-center mx-auto" style="max-width: 1200px; z-index: 1000;">
+    <nav class="fixed-top glass-nav py-3 px-4 mx-auto mt-2 mb-3 rounded-pill shadow-sm d-flex justify-content-between align-items-center" style="max-width: 1200px; z-index: 1000;">
         <a href="{{ route('home') }}" class="marker-title fs-3 text-teal mb-0 text-decoration-none">Neo Apex <span class="text-yellow">Virtual Zoo</span></a>
         
         <div class="d-none d-md-flex gap-4">
@@ -46,13 +49,26 @@
         <a href="{{ route('home') }}" class="btn-zoo py-2 px-4 fs-6">Basecamp</a>
     </nav>
 
-    <main style="padding-top: 100px;">
+    <main style="padding-top: 20px;">
         @yield('content')
     </main>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1200,
+                once: true,
+                easing: 'ease-out-cubic'
+            });
+        });
+    </script>
+
     @stack('scripts')
 </body>
 </html>
