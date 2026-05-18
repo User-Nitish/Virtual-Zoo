@@ -162,13 +162,3 @@
         });
     </script>
 @endpush
-                "panorama": "{{ $currentHabitat }}",
-                "autoLoad": true,
-                "compass": false,
-                "mouseZoom": false,
-                "showControls": true,
-                "crossOrigin": "anonymous"
-            });
-        });
-    </script>
-@endpush
