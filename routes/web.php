@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -17,8 +18,13 @@ Route::view('/modern-webcams', 'zoo.webcams')->name('modern.webcams');
 // Bootstrap Test Route
 Route::view('/test', 'test')->name('test');
 
-// Admin Routes (No Auth for College Project simplicity)
-Route::prefix('admin')->group(function () {
+// Authentication Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Admin Routes (Protected by Auth Middleware)
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
     // Resource route for all Animal CRUD operations (Admin Table)

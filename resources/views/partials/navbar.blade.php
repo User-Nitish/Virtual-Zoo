@@ -24,10 +24,22 @@
                     <li class="nav-item mx-1">
                         <a class="nav-link nav-pill-link {{ request()->routeIs('modern.webcams') ? 'active' : '' }}" href="{{ route('modern.webcams') }}">Live Cams</a>
                     </li>
-                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-                        <a class="btn-zoo bg-yellow text-dark px-4 py-2 text-decoration-none shadow-sm" href="{{ route('admin.dashboard') }}" style="font-size: 0.9rem; padding: 8px 20px !important;">
-                            <i class="fa-solid fa-user-shield me-2"></i>Admin
-                        </a>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex gap-2">
+                        @auth
+                            <a class="btn-zoo bg-teal text-white px-4 py-2 text-decoration-none shadow-sm" href="{{ route('admin.dashboard') }}" style="font-size: 0.9rem; padding: 8px 20px !important;">
+                                <i class="fa-solid fa-gauge-high me-2"></i>Dashboard
+                            </a>
+                            <form action="{{ route('logout') }}" method="POST" class="m-0">
+                                @csrf
+                                <button type="submit" class="btn-zoo bg-danger text-white px-3 py-2 border-0 shadow-sm" style="font-size: 0.9rem; padding: 8px 15px !important;">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </button>
+                            </form>
+                        @else
+                            <a class="btn-zoo bg-yellow text-dark px-4 py-2 text-decoration-none shadow-sm" href="{{ route('admin.dashboard') }}" style="font-size: 0.9rem; padding: 8px 20px !important;">
+                                <i class="fa-solid fa-user-shield me-2"></i>Admin
+                            </a>
+                        @endauth
                     </li>
                 </ul>
             </div>

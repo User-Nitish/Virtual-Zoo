@@ -15,7 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::firstOrCreate(
+            ['email' => 'admin@virtualzoo.com'],
+            [
+                'name' => 'System Administrator',
+                'password' => bcrypt('password'),
+            ]
+        );
 
         $this->call([
             CategorySeeder::class,
