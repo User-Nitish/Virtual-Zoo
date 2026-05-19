@@ -729,6 +729,49 @@
                 }
             });
         }, 2000);
+
+        // Fullscreen Logic for Webcams
+        document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const viewport = this.closest('.cam-viewport');
+                
+                if (!document.fullscreenElement) {
+                    if (viewport.requestFullscreen) {
+                        viewport.requestFullscreen().catch(err => console.log(err));
+                    } else if (viewport.webkitRequestFullscreen) { /* Safari */
+                        viewport.webkitRequestFullscreen();
+                    } else if (viewport.msRequestFullscreen) { /* IE11 */
+                        viewport.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            });
+        });
+
+        // Update Fullscreen Icons on toggle
+        document.addEventListener('fullscreenchange', () => {
+            document.querySelectorAll('.fullscreen-btn i').forEach(icon => {
+                icon.classList.remove('fa-compress');
+                icon.classList.add('fa-expand');
+            });
+            
+            if (document.fullscreenElement) {
+                const activeBtn = document.fullscreenElement.querySelector('.fullscreen-btn i');
+                if (activeBtn) {
+                    activeBtn.classList.remove('fa-expand');
+                    activeBtn.classList.add('fa-compress');
+                }
+            }
+        });
     });
 </script>
 @endpush
