@@ -2,31 +2,7 @@
 
 @section('title', $animal->name . ' - Virtual Zoo')
 
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-    <style>
-        #panorama {
-            width: 100%;
-            height: 400px;
-            border-radius: 2rem;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-        .panorama-badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--zoo-plum);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-    </style>
-@endpush
+
 
 @section('content')
 <div class="mb-5 pt-3">
@@ -106,27 +82,6 @@
     </div>
 </div>
 
-<!-- 360 Panorama Section -->
-<div class="mt-5 pt-5" data-aos="fade-up">
-    <div class="bg-white p-5 rounded-5 shadow-lg border border-light position-relative">
-        <div class="mb-4">
-            <span class="text-yellow fw-bold text-uppercase d-block mb-2" style="letter-spacing: 3px; font-size: 0.8rem;">Immersive Experience</span>
-            <h3 class="marker-title text-plum" style="font-size: 3rem;">Explore the Habitat</h3>
-            <p class="text-muted">Take a virtual 360° tour of where the {{ $animal->name }} lives in our sanctuary.</p>
-        </div>
-        
-        <div class="position-relative">
-            <div class="panorama-badge">
-                <i class="fa-solid fa-vr-cardboard me-2"></i> 360° INTERACTIVE VIEW
-            </div>
-            <div id="panorama"></div>
-        </div>
-        
-        <div class="mt-4 text-center">
-            <p class="text-muted small"><i class="fa-solid fa-mouse me-2"></i>Drag your mouse or use touch to look around the environment</p>
-        </div>
-    </div>
-</div>
 
 <!-- Related Animals Section -->
 @if($relatedAnimals->count() > 0)
@@ -147,18 +102,4 @@
 
 @endsection
 
-@push('scripts')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            pannellum.viewer('panorama', {
-                "type": "equirectangular",
-                "panorama": "https://pannellum.org/images/alma.jpg", // Default placeholder
-                "autoLoad": true,
-                "compass": false,
-                "mouseZoom": false,
-                "showControls": true
-            });
-        });
-    </script>
-@endpush
+
