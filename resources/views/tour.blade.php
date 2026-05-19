@@ -934,9 +934,106 @@
                 closePanorama();
             });
         }
+        
+    </script>
 
+    <!-- AMBIENCE AUDIO ASSETS -->
+    <div id="audio-assets" style="display: none;">
+        <audio id="audio-chap-0" src="{{ asset('audio/tour/chimp.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-1" src="{{ asset('audio/tour/elephant.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-2" src="{{ asset('audio/tour/penguin.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-3" src="{{ asset('audio/tour/tiger.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-4" src="{{ asset('audio/tour/leopard.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-5" src="{{ asset('audio/tour/gorilla.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-6" src="{{ asset('audio/tour/shark.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-7" src="{{ asset('audio/tour/macaw.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-8" src="{{ asset('audio/tour/bear.mp3') }}" loop preload="auto"></audio>
+        <audio id="audio-chap-9" src="{{ asset('audio/tour/komodo.mp3') }}" loop preload="auto"></audio>
+    </div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
+
+            // AUDIO MANAGEMENT
+            let audioUnlocked = false;
+            let currentPlayingAudio = null;
+            let audioCtx = null;
+            const audioGains = {};
+
+            function unlockAudio() {
+                if (audioUnlocked) return;
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext && !audioCtx) {
+                        audioCtx = new AudioContext();
+                        audioCtx.resume();
+                    }
+                } catch(e) {}
+
+                const audios = document.querySelectorAll('#audio-assets audio');
+                audios.forEach(audio => {
+                    if (audioCtx && !audioGains[audio.id]) {
+                        try {
+                            const source = audioCtx.createMediaElementSource(audio);
+                            const gainNode = audioCtx.createGain();
+                            gainNode.gain.value = 0; // start muted
+                            source.connect(gainNode);
+                            gainNode.connect(audioCtx.destination);
+                            audioGains[audio.id] = gainNode;
+                        } catch(e) {}
+                    }
+                    audio.volume = 0; // Mute the base HTML element so we only hear the amplified Web Audio API node
+                    audio.play().then(() => {
+                        audio.pause();
+                    }).catch(e => console.log("Audio unlock failed: ", e));
+                });
+                audioUnlocked = true;
+            }
+
+            function crossfadeAudio(targetId) {
+                if (!audioUnlocked) return;
+                
+                const targetAudio = targetId ? document.getElementById(targetId) : null;
+                if (currentPlayingAudio === targetAudio) return;
+                
+                const audios = document.querySelectorAll('#audio-assets audio');
+                audios.forEach(audio => {
+                    if (audio !== targetAudio && !audio.paused) {
+                        const gainNode = audioGains[audio.id];
+                        if (gainNode) {
+                            gsap.to(gainNode.gain, { value: 0, duration: 1.5, onComplete: () => audio.pause() });
+                        } else {
+                            gsap.to(audio, { volume: 0, duration: 1.5, onComplete: () => audio.pause() });
+                        }
+                    }
+                });
+
+                if (targetAudio) {
+                    currentPlayingAudio = targetAudio;
+                    targetAudio.play().catch(e => console.log("Play failed: ", e));
+                    
+                    const gainNode = audioGains[targetAudio.id];
+                    if (gainNode) {
+                        targetAudio.volume = 1.0; // Ensure base volume is up for source
+                        gsap.to(gainNode.gain, { value: 5.0, duration: 1.5 }); // BOOST VOLUME BY 500%
+                    } else {
+                        gsap.to(targetAudio, { volume: 1.0, duration: 1.5 }); // fallback
+                    }
+                } else {
+                    currentPlayingAudio = null;
+                }
+            }
+
+            // Pause all audio when scrolling back to hero
+            ScrollTrigger.create({
+                trigger: '#hero',
+                start: "top top",
+                end: "bottom center",
+                onEnter: () => crossfadeAudio(null),
+                onEnterBack: () => crossfadeAudio(null)
+            });
+
 
             // Generate Particles for each container
             document.querySelectorAll('.bg-particles').forEach(container => {
@@ -1038,6 +1135,8 @@
                             tempCtx.resume();
                         }
                     } catch(e) {}
+                    
+                    unlockAudio();
 
                     gsap.to('#preloader', {
                         opacity: 0,
@@ -1100,7 +1199,9 @@
                         scrollTrigger: {
                             trigger: section,
                             start: "top 70%",
-                            toggleActions: "play none none reverse"
+                            toggleActions: "play none none reverse",
+                            onEnter: () => crossfadeAudio(`audio-chap-${index}`),
+                            onEnterBack: () => crossfadeAudio(`audio-chap-${index}`)
                         }
                     }
                 );
