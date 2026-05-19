@@ -397,9 +397,9 @@
                             <h2 class="chapter-title">The Deep Canopy</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">In the emerald shadows of the Virunga Mountains, life moves at a different pace. Every rustle of leaves tells a story of survival, heritage, and the delicate balance of the deep jungle ecosystem.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="https://upload.wikimedia.org/wikipedia/commons/e/e1/Rainforest_trail_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg" data-title="The Deep Canopy">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e1/Rainforest_trail_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'The Deep Canopy')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -424,9 +424,9 @@
                             <h2 class="chapter-title">Golden Plains</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Feel the thunderous rhythm of hooves across the endless horizon. A land where ancient instincts guide million-strong migrations and predators await in the tall golden grass.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/savannah_360.png') }}" data-title="Golden Plains">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/savannah_360.png') }}', 'Golden Plains')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -451,9 +451,9 @@
                             <h2 class="chapter-title">Frozen Expanse</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Survive the harshest conditions on Earth. In the icy desolate plains, life finds a way through remarkable adaptations, enduring absolute zero to protect the next generation.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/polar_360.png') }}" data-title="Frozen Expanse">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/polar_360.png') }}', 'Frozen Expanse')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -478,9 +478,9 @@
                             <h2 class="chapter-title">Jungle Royalty</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Move silently through the dense undergrowth. Witness the majestic power and solitary nature of the world's most fearsome apex predators in their natural domain.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/tiger_360.png') }}" data-title="Jungle Royalty">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/tiger_360.png') }}', 'Jungle Royalty')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -505,9 +505,9 @@
                             <h2 class="chapter-title">High Peaks</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Ascend to the roof of the world where oxygen is scarce and survival requires extreme adaptation. Only the most resilient thrive as mountain sentinels among the clouds.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/snow_leopard_360.png') }}" data-title="High Peaks">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/snow_leopard_360.png') }}', 'High Peaks')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -532,9 +532,9 @@
                             <h2 class="chapter-title">The Silverback</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Venture deeper into the mist. Encounter the intelligent and powerful leaders of the forest, guiding their complex families with a mix of gentle strength and fierce protection.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/gorilla_360.png') }}" data-title="The Silverback">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/gorilla_360.png') }}', 'The Silverback')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -559,9 +559,9 @@
                             <h2 class="chapter-title">Ocean Depths</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Submerge into the alien world beneath the waves. Glide alongside the undisputed apex predators of the deep blue in a realm where gravity holds no power.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/reef_360.png') }}" data-title="Ocean Depths">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/reef_360.png') }}', 'Ocean Depths')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -586,9 +586,9 @@
                             <h2 class="chapter-title">Canopy Kings</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Look up to the highest branches. A kaleidoscope of colors flashes through the leaves as the vibrant kings of the canopy take flight in a display of unmatched aerial agility.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/macaw_360.png') }}" data-title="Canopy Kings">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/macaw_360.png') }}', 'Canopy Kings')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -613,9 +613,9 @@
                             <h2 class="chapter-title">Forest Giants</h2>
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Wander through the frozen northern pine forests. Meet the undisputed masters of the wilderness, built for power, endurance, and solitary reign over vast territories.</p>
                             
-                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/bear_360.png') }}" data-title="Forest Giants">
+                            <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/bear_360.png') }}', 'Forest Giants')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                 <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -641,9 +641,9 @@
                             <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Step into the harsh, arid landscapes where prehistoric survivors still rule. Come face to face with the true dragons of the modern world in their unforgiving domain.</p>
                             
                             <div class="d-flex gap-4 mt-5 flex-wrap">
-                                <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/komodo_360.png') }}" data-title="Desert Dragons">
+                                <a href="javascript:void(0);" class="panorama-btn" onclick="openPanorama('{{ asset('images/tour/komodo_360.png') }}', 'Desert Dragons')" style="position: relative; z-index: 9999; pointer-events: auto;">
                                     <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
-                                </button>
+                                </a>
                                 <a href="{{ route('home') }}" class="panorama-btn" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
                                     <i class="fa-solid fa-flag-checkered"></i> Complete
                                 </a>
@@ -916,25 +916,24 @@
             }
         }
 
-        // Use global event delegation to guarantee click capture regardless of DOM depth/overlays
-        document.body.addEventListener('click', function(e) {
-            // Check if click was on a habitat trigger or inside it
-            const habitatBtn = e.target.closest('.trigger-habitat');
-            if (habitatBtn) {
+        // Direct event listeners for robust click handling
+        document.querySelectorAll('.trigger-habitat').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const url = habitatBtn.getAttribute('data-url');
-                const title = habitatBtn.getAttribute('data-title');
+                const url = this.getAttribute('data-url');
+                const title = this.getAttribute('data-title');
                 openPanorama(url, title);
-            }
-            
-            // Check if click was on the close button
-            const closeBtn = e.target.closest('#close-panorama-btn');
-            if (closeBtn) {
+            });
+        });
+
+        const closeBtn = document.getElementById('close-panorama-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 closePanorama();
-            }
-        });
+            });
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
@@ -1046,7 +1045,11 @@
                         ease: "power2.inOut",
                         onComplete: () => {
                             const preloader = document.getElementById('preloader');
-                            if(preloader) preloader.style.display = 'none';
+                            if(preloader) {
+                                preloader.classList.remove('d-flex');
+                                preloader.style.setProperty('display', 'none', 'important');
+                                preloader.style.pointerEvents = 'none';
+                            }
                             document.body.classList.remove('no-scroll');
                             
                             const contentWrap = document.getElementById('hero-content-wrapper');
