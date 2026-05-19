@@ -15,219 +15,390 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
+    <!-- Google Fonts for Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --glass-bg: rgba(10, 15, 25, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-color: rgba(0, 240, 255, 0.4);
+        }
+
         body {
             overflow-x: hidden;
             margin: 0;
-            background-color: var(--zoo-dark);
+            background-color: #000000;
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+        }
+        
+        body.no-scroll {
+            overflow: hidden !important;
         }
 
         /* Hide scrollbar for seamless cinematic experience */
-        ::-webkit-scrollbar {
-            width: 8px;
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #666; }
+
+        /* Typography upgrades */
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255,255,255,0.15);
+            margin-bottom: 2rem;
         }
-        ::-webkit-scrollbar-track {
-            background: #f0f4f8;
+
+        .chapter-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 0.8;
+            opacity: 0.15;
+            background: linear-gradient(180deg, #fff 0%, transparent 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            pointer-events: none;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #c0d0e0;
-            border-radius: 4px;
+
+        .chapter-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
         /* Habitat Sections */
         .chapter-section {
-            height: 100vh;
+            min-height: 100vh;
             width: 100vw;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
+            z-index: 10;
         }
 
-        /* Elements to animate (hidden by default to prevent FOUC) */
         .anim-element {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .anim-bg {
-            transition: transform 0.3s ease-out;
+            /* Handled by GSAP, but ensure initial state is invisible */
+            visibility: hidden; 
         }
 
-        .blob-showcase {
-            width: 100%;
-            height: 60vh;
-            max-height: 600px;
+        /* Full Screen Animated Backgrounds */
+        .bg-wrapper {
+            position: absolute;
+            top: 0; 
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        /* Glass Text Cards */
+        .chapter-bg-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transform-origin: center;
+            will-change: transform;
+            animation: cinematic-pan 40s infinite alternate ease-in-out;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            filter: contrast(1.05) saturate(1.1);
+        }
+
+        @keyframes cinematic-pan {
+            0% { transform: scale(1.0) translate(0, 0); }
+            50% { transform: scale(1.05) translate(-1%, 1%); }
+            100% { transform: scale(1.0) translate(1%, -1%); }
+        }
+
+        /* Premium Glassmorphism Panel */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 2rem;
-            padding: 3rem;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            background: var(--glass-bg);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 4rem;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            z-index: 20;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+            pointer-events: none;
+        }
+
+        .glass-panel:hover::before {
+            left: 200%;
         }
         
-        .glass-panel-dark {
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 2rem;
-            padding: 3rem;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9), 0 0 50px var(--glow-color), inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        /* Pulsing Holographic Button */
+        .panorama-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 50; /* Bulletproof clickable */
+        }
+
+        .panorama-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .panorama-btn:hover {
+            background: white;
+            color: black;
+            border-color: white;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 20px 50px var(--glow-color);
+        }
+
+        .panorama-btn:hover::after {
+            opacity: 1;
+        }
+
+        .panorama-btn i {
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .panorama-btn:hover i {
+            transform: scale(1.3);
+        }
+
+        /* Return Nav */
+        .nav-return {
+            position: fixed;
+            top: 2.5rem;
+            left: 2.5rem;
+            z-index: 100;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-return:hover {
+            background: white;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(255,255,255,0.5);
         }
 
         /* 360 Viewer Overlay */
         #panorama-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
             z-index: 2000;
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         #panorama-container {
-            width: 90vw;
-            height: 80vh;
-            border-radius: 2rem;
-            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+
+        #panorama-title {
+            position: absolute;
+            top: 3rem;
+            left: 3rem;
+            z-index: 2;
+            text-shadow: 0 5px 30px rgba(0,0,0,1);
         }
 
         .close-panorama {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: 2.5rem; right: 2.5rem;
             color: white;
             font-size: 2.5rem;
             cursor: pointer;
             z-index: 2001;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            background: rgba(0,0,0,0.6);
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .close-panorama:hover {
-            transform: scale(1.2) rotate(90deg);
-        }
-
-        .panorama-btn {
-            background: var(--zoo-yellow);
-            color: var(--zoo-dark);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            margin-top: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .panorama-btn:hover {
+            transform: scale(1.1) rotate(90deg);
             background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: black;
+        }
+
+        /* Particle Animations */
+        .bg-particles {
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 2; overflow: hidden;
+        }
+        .particle { position: absolute; border-radius: 50%; }
+
+        @keyframes float-firefly {
+            0%, 100% { transform: translate(0, 0) scale(0.8); opacity: 0.1; }
+            50% { transform: translate(60px, -150px) scale(1.3); opacity: 0.9; }
+        }
+        @keyframes float-snow {
+            0% { transform: translate(0, -20px) rotate(0deg); opacity: 0.8; }
+            100% { transform: translate(-80px, 110vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes float-bubble {
+            0% { transform: translate(0, 110vh) scale(0.5); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translate(80px, -20px) scale(1.3); opacity: 0; }
+        }
+        @keyframes float-dust {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            50% { transform: translate(-40px, -70px) rotate(180deg); opacity: 0.6; }
+        }
+
+        /* Vignette overlay */
+        .vignette { background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 100%); pointer-events: none; }
+
+        /* PRELOADER STYLES */
+        #preloader {
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            z-index: 9999;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="no-scroll">
 
-    <!-- Navbar Basecamp Return -->
-    <a href="{{ route('home') }}" class="position-fixed top-0 start-0 m-4 z-3 text-decoration-none" style="z-index: 100;">
-        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 50px; height: 50px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <i class="fa-solid fa-arrow-left text-teal fs-4"></i>
+    <!-- CINEMATIC PRELOADER -->
+    <div id="preloader" class="position-fixed w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+        <div class="text-uppercase tracking-widest text-white-50 fw-bold mb-4" style="letter-spacing: 6px; font-size: 1rem;">Neo Apex Presents</div>
+        <div class="hero-title" style="font-size: clamp(3rem, 6vw, 6rem); margin-bottom: 4rem;">Virtual Zoo</div>
+        
+        <div id="loader-container" style="width: 300px; height: 2px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; border-radius: 2px;">
+            <div id="loader-bar" style="width: 0%; height: 100%; background: #fff; transition: width 0.3s ease;"></div>
         </div>
+        <div id="loader-text" class="mt-3 text-white-50 text-uppercase" style="letter-spacing: 3px; font-size: 0.8rem; transition: opacity 0.3s;">Loading Assets... <span id="loader-percent">0</span>%</div>
+
+        <button id="enter-btn" class="panorama-btn mt-4" style="opacity: 0; display: none; transform: translateY(20px); --glow-color: rgba(255, 255, 255, 0.4);">
+            <i class="fa-solid fa-play"></i> Enter Journey
+        </button>
+    </div>
+
+    <!-- Back Navigation -->
+    <a href="{{ route('home') }}" class="nav-return">
+        <i class="fa-solid fa-arrow-left fs-3"></i>
     </a>
 
     <!-- 1. HERO SECTION -->
-    <section class="h-screen w-full d-flex flex-column align-items-center justify-content-center position-relative overflow-hidden bg-white" id="hero" style="height: 100vh;">
-        <!-- Blurred Background Hero -->
-        <div class="position-absolute w-100 h-100 z-0" style="background-image: url('{{ asset('images/placeholders/rainforest.png') }}'); background-size: cover; background-position: center; filter: blur(10px); transform: scale(1.1);"></div>
-        <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px);"></div>
-        
-        <div class="position-relative z-2 text-center px-4">
-            <h1 class="marker-title text-plum mb-4 anim-hero" style="font-size: 6rem; line-height: 1;" id="hero-title">VIRTUAL ZOO TOUR</h1>
-            <p class="fs-3 text-dark mb-0 anim-hero fw-bold" id="hero-subtitle" style="text-shadow: 0 2px 10px rgba(255,255,255,0.5);">A ten-chapter immersive journey into the wild.</p>
+    <section class="h-screen w-full d-flex flex-column align-items-center justify-content-center position-relative overflow-hidden" id="hero" style="height: 100vh;">
+        <div class="bg-wrapper" style="width: 100vw; left: 0;">
+            <img src="{{ asset('images/placeholders/rainforest.png?v=2') }}" class="chapter-bg-img" alt="Rainforest" style="filter: brightness(0.4);">
+        </div>
+        <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+        <div class="bg-particles" data-type="fireflies"></div>
+
+        <div class="position-relative z-2 text-center px-4 d-flex flex-column align-items-center w-100" style="opacity: 0;" id="hero-content-wrapper">
+            <span class="text-uppercase tracking-widest text-white-50 fw-bold mb-4 anim-hero" style="letter-spacing: 6px; font-size: 1.2rem;">Neo Apex Presents</span>
+            <h1 class="hero-title anim-hero" id="hero-title">Virtual<br>Zoo Tour</h1>
+            <p class="fs-3 text-white-50 mb-0 anim-hero mt-3" id="hero-subtitle" style="max-width: 800px; font-weight: 300;">A ten-chapter immersive cinematic journey into the wild. Experience nature's most majestic habitats.</p>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 d-flex flex-column align-items-center anim-hero z-2" id="scroll-indicator">
-            <span class="small fw-bold text-uppercase text-teal mb-2" style="letter-spacing: 2px; text-shadow: 0 2px 5px rgba(255,255,255,0.8);">Scroll to Enter</span>
-            <i class="fa-solid fa-chevron-down text-teal fs-4"></i>
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 d-flex flex-column align-items-center anim-hero z-2" id="scroll-indicator" style="opacity: 0;">
+            <span class="small fw-bold text-uppercase text-white-50 mb-4" style="letter-spacing: 4px;">Initiate Journey</span>
+            <div style="width: 2px; height: 80px; background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);"></div>
         </div>
     </section>
 
     <!-- CHAPTERS CONTAINER -->
     <div id="chapters-wrapper">
         
-        <!-- CHAPTER 1: THE DEEP CANOPY -->
-        <section class="chapter-section position-relative" id="chapter-1">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/rainforest.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(0, 134, 145, 0.65); backdrop-filter: blur(10px);"></div>
+        <!-- CHAPTER 1: THE DEEP CANOPY (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-1" style="--glow-color: rgba(0, 255, 150, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/chimp.png?v=2') }}" class="chapter-bg-img" alt="Chimpanzee">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="fireflies"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 order-2 order-lg-1 px-3 px-md-4 mt-5 mt-lg-0">
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
                         <div class="anim-element glass-panel">
-                            <span class="text-yellow fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 01</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">THE DEEP CANOPY</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">In the emerald shadows of the Virunga Mountains, life moves at a different pace. Every rustle of leaves tells a story of survival and heritage.</p>
+                            <div class="chapter-number">01</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #00ffaa; letter-spacing: 4px; font-size: 1.1rem;">The Emerald Shadows</span>
+                            <h2 class="chapter-title">The Deep Canopy</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">In the emerald shadows of the Virunga Mountains, life moves at a different pace. Every rustle of leaves tells a story of survival, heritage, and the delicate balance of the deep jungle ecosystem.</p>
                             
-                            <div class="d-flex align-items-center">
-                                <span class="text-yellow fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">01</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Witness the Silent Guardians of the rainforest in their natural state.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e1/Rainforest_trail_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'The Deep Canopy')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-1 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/chimp.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Chimpanzee">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPTER 2: THE GOLDEN PLAINS -->
-        <section class="chapter-section position-relative" id="chapter-2">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/savannah.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(241, 178, 0, 0.65); backdrop-filter: blur(10px);"></div>
-            
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-2 mx-auto blob-showcase shadow-lg border border-white border-opacity-50" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/elephant.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Elephant">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 px-md-4">
-                        <div class="anim-element glass-panel" style="background: rgba(255, 255, 255, 0.35); border-color: rgba(255,255,255,0.6);">
-                            <span class="text-plum fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 02</span>
-                            <h2 class="marker-title text-dark mb-4" style="font-size: 4.5rem; line-height: 1;">GOLDEN PLAINS</h2>
-                            <p class="fs-4 text-dark mb-5 fw-medium" style="opacity: 0.9;">Feel the thunderous rhythm of hooves across the endless horizon. A land where ancient instincts guide million-strong migrations.</p>
-                            
-                            <div class="d-flex align-items-center">
-                                <span class="text-plum fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">02</span>
-                                <div style="width: 3px; height: 50px; background-color: rgba(0,0,0,0.3);" class="me-4"></div>
-                                <p class="text-dark mb-0 fs-5 fw-bold">Stand amidst the greatest terrestrial journey on the planet.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/6/60/Grasslands_sunset_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Golden Plains')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="https://upload.wikimedia.org/wikipedia/commons/e/e1/Rainforest_trail_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg" data-title="The Deep Canopy">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
                         </div>
                     </div>
@@ -235,65 +406,26 @@
             </div>
         </section>
 
-        <!-- CHAPTER 3: THE FROZEN EXPANSE -->
-        <section class="chapter-section position-relative" id="chapter-3">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/polar.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(129, 56, 97, 0.65); backdrop-filter: blur(10px);"></div>
+        <!-- CHAPTER 2: THE GOLDEN PLAINS (LEFT Card) -->
+        <section class="chapter-section position-relative" id="chapter-2" style="--glow-color: rgba(255, 180, 0, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; left: 0; right: auto;">
+                <img src="{{ asset('images/placeholders/elephant.png?v=2') }}" class="chapter-bg-img" alt="Elephant">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="dust"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 order-2 order-lg-1 px-3 px-md-4 mt-5 mt-lg-0">
+            <div class="container-fluid h-100 d-flex align-items-center position-relative z-2 px-0">
+                <div class="row w-100 m-0">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 ms-md-5">
                         <div class="anim-element glass-panel">
-                            <span class="text-yellow fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 03</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">FROZEN EXPANSE</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Survive the harshest conditions on Earth. In the icy desolate plains, emperors march through blizzards to protect their future.</p>
+                            <div class="chapter-number">02</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #ffb400; letter-spacing: 4px; font-size: 1.1rem;">The Great Migration</span>
+                            <h2 class="chapter-title">Golden Plains</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Feel the thunderous rhythm of hooves across the endless horizon. A land where ancient instincts guide million-strong migrations and predators await in the tall golden grass.</p>
                             
-                            <div class="d-flex align-items-center">
-                                <span class="text-yellow fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">03</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Brave the ultimate test of endurance and devotion.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e5/Snowy_field_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Frozen Expanse')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-3 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/penguin.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Emperor Penguin">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPTER 4: APEX PREDATORS -->
-        <section class="chapter-section position-relative" id="chapter-4">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/jungle.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(44, 62, 80, 0.75); backdrop-filter: blur(10px);"></div>
-            
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-4 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/tiger.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Bengal Tiger">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 px-md-4">
-                        <div class="anim-element glass-panel-dark">
-                            <span class="text-teal fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 04</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">JUNGLE ROYALTY</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Move silently through the dense undergrowth. Witness the majestic power and solitary nature of the world's most fearsome apex predators.</p>
-                            
-                            <div class="d-flex align-items-center">
-                                <span class="text-teal fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">04</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.3);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Respect the profound silence before the strike.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/1/18/Forest_cave_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Jungle Royalty')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/savannah_360.png') }}" data-title="Golden Plains">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
                         </div>
                     </div>
@@ -301,65 +433,26 @@
             </div>
         </section>
 
-        <!-- CHAPTER 5: THE HIGH PEAKS -->
-        <section class="chapter-section position-relative" id="chapter-5">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/mountains.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-image: linear-gradient(135deg, rgba(0, 134, 145, 0.75) 0%, rgba(44, 62, 80, 0.8) 100%); backdrop-filter: blur(10px);"></div>
+        <!-- CHAPTER 3: THE FROZEN EXPANSE (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-3" style="--glow-color: rgba(100, 200, 255, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/penguin.png?v=2') }}" class="chapter-bg-img" alt="Penguin">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="snow"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 order-2 order-lg-1 px-3 px-md-4 mt-5 mt-lg-0">
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
                         <div class="anim-element glass-panel">
-                            <span class="text-yellow fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 05</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">HIGH PEAKS</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Ascend to the roof of the world where oxygen is scarce and survival requires extreme adaptation. Only the most resilient thrive here.</p>
+                            <div class="chapter-number">03</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #64c8ff; letter-spacing: 4px; font-size: 1.1rem;">Absolute Zero</span>
+                            <h2 class="chapter-title">Frozen Expanse</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Survive the harshest conditions on Earth. In the icy desolate plains, life finds a way through remarkable adaptations, enduring absolute zero to protect the next generation.</p>
                             
-                            <div class="d-flex align-items-center">
-                                <span class="text-yellow fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">05</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Conquer the clouds and discover mountain sentinels.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/9/91/Mountain_peak_02_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'High Peaks')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-1 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/leopard.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Snow Leopard">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPTER 6: THE SILVERBACK -->
-        <section class="chapter-section position-relative" id="chapter-6">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/rainforest.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(241, 178, 0, 0.65); backdrop-filter: blur(10px);"></div>
-            
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-2 mx-auto blob-showcase shadow-lg border border-white border-opacity-50" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/gorilla.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Silverback Gorilla">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 px-md-4">
-                        <div class="anim-element glass-panel" style="background: rgba(255, 255, 255, 0.35); border-color: rgba(255,255,255,0.6);">
-                            <span class="text-plum fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 06</span>
-                            <h2 class="marker-title text-dark mb-4" style="font-size: 4.5rem; line-height: 1;">THE SILVERBACK</h2>
-                            <p class="fs-4 text-dark mb-5 fw-medium" style="opacity: 0.9;">Venture deeper into the mist. Encounter the intelligent and powerful leaders of the forest, guiding their families with gentle strength.</p>
-                            
-                            <div class="d-flex align-items-center">
-                                <span class="text-plum fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">06</span>
-                                <div style="width: 3px; height: 50px; background-color: rgba(0,0,0,0.3);" class="me-4"></div>
-                                <p class="text-dark mb-0 fs-5 fw-bold">Observe the incredible social bonds of our closest relatives.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/1/13/Kohama_Island%2C_Mangrove_360-degree.jpg', 'The Silverback')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/polar_360.png') }}" data-title="Frozen Expanse">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
                         </div>
                     </div>
@@ -367,65 +460,26 @@
             </div>
         </section>
 
-        <!-- CHAPTER 7: OCEAN DEPTHS -->
-        <section class="chapter-section position-relative" id="chapter-7">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/coral.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(44, 62, 80, 0.85); backdrop-filter: blur(10px);"></div>
-            
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 order-2 order-lg-1 px-3 px-md-4 mt-5 mt-lg-0">
-                        <div class="anim-element glass-panel-dark">
-                            <span class="text-teal fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 07</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">OCEAN DEPTHS</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Submerge into the alien world beneath the waves. Glide alongside the undisputed apex predators of the deep blue.</p>
-                            
-                            <div class="d-flex align-items-center">
-                                <span class="text-teal fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">07</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Swim with the great white sharks in perfect silence.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/d/d3/Lady_Elliot_Island_SVII.jpg', 'Ocean Depths')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-3 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/shark.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Great White Shark">
-                        </div>
-                    </div>
-                </div>
+        <!-- CHAPTER 4: JUNGLE ROYALTY (LEFT Card) -->
+        <section class="chapter-section position-relative" id="chapter-4" style="--glow-color: rgba(255, 100, 50, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; left: 0; right: auto;">
+                <img src="{{ asset('images/placeholders/tiger.png?v=2') }}" class="chapter-bg-img" alt="Tiger">
             </div>
-        </section>
-
-        <!-- CHAPTER 8: CANOPY KINGS -->
-        <section class="chapter-section position-relative" id="chapter-8">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/jungle.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(129, 56, 97, 0.75); backdrop-filter: blur(10px);"></div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="fireflies"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-4 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/macaw.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Macaw">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 px-3 px-md-4">
+            <div class="container-fluid h-100 d-flex align-items-center position-relative z-2 px-0">
+                <div class="row w-100 m-0">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 ms-md-5">
                         <div class="anim-element glass-panel">
-                            <span class="text-yellow fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 08</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">CANOPY KINGS</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Look up to the highest branches. A kaleidoscope of colors flashes through the leaves as the vibrant kings of the canopy take flight.</p>
+                            <div class="chapter-number">04</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #ff6432; letter-spacing: 4px; font-size: 1.1rem;">The Apex</span>
+                            <h2 class="chapter-title">Jungle Royalty</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Move silently through the dense undergrowth. Witness the majestic power and solitary nature of the world's most fearsome apex predators in their natural domain.</p>
                             
-                            <div class="d-flex align-items-center">
-                                <span class="text-yellow fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">08</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.3);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Listen to the chorus of the scarlet macaws.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-yellow text-dark" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/8/87/Spooky_bamboo_morning_-_Panorama_%28Dimitrios_Savva_and_Jarod_Guest_via_Poly_Haven%29.jpg', 'Canopy Kings')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/tiger_360.png') }}" data-title="Jungle Royalty">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
                         </div>
                     </div>
@@ -433,69 +487,166 @@
             </div>
         </section>
 
-        <!-- CHAPTER 9: FOREST GIANTS -->
-        <section class="chapter-section position-relative" id="chapter-9">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/polar.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(0, 134, 145, 0.7); backdrop-filter: blur(10px);"></div>
+        <!-- CHAPTER 5: HIGH PEAKS (LEFT Card) -->
+        <section class="chapter-section position-relative" id="chapter-5" style="--glow-color: rgba(200, 200, 255, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; left: 0; right: auto;">
+                <img src="{{ asset('images/placeholders/leopard.png?v=2') }}" class="chapter-bg-img" alt="Leopard">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="snow"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 order-2 order-lg-1 px-3 px-md-4 mt-5 mt-lg-0">
+            <div class="container-fluid h-100 d-flex align-items-center position-relative z-2 px-0">
+                <div class="row w-100 m-0">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 ms-md-5">
                         <div class="anim-element glass-panel">
-                            <span class="text-yellow fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 09</span>
-                            <h2 class="marker-title text-white mb-4" style="font-size: 4.5rem; line-height: 1;">FOREST GIANTS</h2>
-                            <p class="fs-4 text-white mb-5" style="opacity: 0.95;">Wander through the frozen northern pine forests. Meet the undisputed masters of the wilderness, built for power and endurance.</p>
+                            <div class="chapter-number">05</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #c8c8ff; letter-spacing: 4px; font-size: 1.1rem;">The Thin Air</span>
+                            <h2 class="chapter-title">High Peaks</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Ascend to the roof of the world where oxygen is scarce and survival requires extreme adaptation. Only the most resilient thrive as mountain sentinels among the clouds.</p>
                             
-                            <div class="d-flex align-items-center">
-                                <span class="text-yellow fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">09</span>
-                                <div style="width: 2px; height: 50px; background-color: rgba(255,255,255,0.4);" class="me-4"></div>
-                                <p class="text-white mb-0 fs-5 fw-medium">Encounter the majestic grizzly bear in its domain.</p>
-                            </div>
-
-                            <button class="panorama-btn mt-4 bg-teal text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/d/d3/El_Teide_Tenerife_Photosphere.jpg', 'Forest Giants')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/snow_leopard_360.png') }}" data-title="High Peaks">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-1 mx-auto blob-showcase shadow-lg border border-white border-opacity-25" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/bear.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Grizzly Bear">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPTER 10: DESERT DRAGONS -->
-        <section class="chapter-section position-relative" id="chapter-10">
-            <div class="position-absolute w-100 h-100 z-0 anim-bg" style="background-image: url('{{ asset('images/placeholders/savannah.png') }}'); background-size: cover; background-position: center; filter: blur(12px); transform: scale(1.15);"></div>
-            <div class="position-absolute w-100 h-100 z-1" style="background-color: rgba(241, 178, 0, 0.7); backdrop-filter: blur(10px);"></div>
+        <!-- CHAPTER 6: THE SILVERBACK (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-6" style="--glow-color: rgba(180, 255, 100, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/gorilla.png?v=2') }}" class="chapter-bg-img" alt="Gorilla">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="dust"></div>
             
-            <div class="container h-100 d-flex align-items-center position-relative z-2">
-                <div class="row w-100 align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0 px-3 px-md-4">
-                        <div class="anim-element blob-container blob-shape-2 mx-auto blob-showcase shadow-lg border border-white border-opacity-50" style="width: 100%; aspect-ratio: 1/1; max-width: 500px;">
-                            <img src="{{ asset('images/placeholders/komodo.png') }}" class="blob-img w-100 h-100" style="object-fit: cover;" alt="Komodo Dragon">
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
+                        <div class="anim-element glass-panel">
+                            <div class="chapter-number">06</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #b4ff64; letter-spacing: 4px; font-size: 1.1rem;">Gentle Giants</span>
+                            <h2 class="chapter-title">The Silverback</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Venture deeper into the mist. Encounter the intelligent and powerful leaders of the forest, guiding their complex families with a mix of gentle strength and fierce protection.</p>
+                            
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/gorilla_360.png') }}" data-title="The Silverback">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
+                            </button>
                         </div>
                     </div>
-                    <div class="col-lg-6 px-3 px-md-4">
-                        <div class="anim-element glass-panel" style="background: rgba(255, 255, 255, 0.35); border-color: rgba(255,255,255,0.6);">
-                            <span class="text-plum fw-bold text-uppercase mb-3 d-block" style="letter-spacing: 2px;">CHAPTER 10</span>
-                            <h2 class="marker-title text-dark mb-4" style="font-size: 4.5rem; line-height: 1;">DESERT DRAGONS</h2>
-                            <p class="fs-4 text-dark mb-5 fw-medium" style="opacity: 0.9;">Step into the harsh, arid landscapes where prehistoric survivors still rule. The true dragons of the modern world.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 7: OCEAN DEPTHS (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-7" style="--glow-color: rgba(0, 150, 255, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/shark.png?v=2') }}" class="chapter-bg-img" alt="Shark">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="bubbles"></div>
+            
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
+                        <div class="anim-element glass-panel">
+                            <div class="chapter-number">07</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #0096ff; letter-spacing: 4px; font-size: 1.1rem;">The Abyss</span>
+                            <h2 class="chapter-title">Ocean Depths</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Submerge into the alien world beneath the waves. Glide alongside the undisputed apex predators of the deep blue in a realm where gravity holds no power.</p>
                             
-                            <div class="d-flex align-items-center mb-5">
-                                <span class="text-plum fw-bold me-4" style="font-size: 3.5rem; line-height: 1;">10</span>
-                                <div style="width: 3px; height: 50px; background-color: rgba(0,0,0,0.3);" class="me-4"></div>
-                                <p class="text-dark mb-0 fs-5 fw-bold">Come face to face with the ancient Komodo Dragon.</p>
-                            </div>
-                            
-                            <button class="panorama-btn mt-4 bg-plum text-white" onclick="openPanorama('https://upload.wikimedia.org/wikipedia/commons/e/e3/Grand_Canyon_National_Park-_Desert_View_Point_and_Watchtower.jpg', 'Desert Dragons')">
-                                <i class="fa-solid fa-vr-cardboard"></i> Enter 360 Habitat
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/reef_360.png') }}" data-title="Ocean Depths">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 8: CANOPY KINGS (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-8" style="--glow-color: rgba(255, 100, 100, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/macaw.png?v=2') }}" class="chapter-bg-img" alt="Macaw">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="fireflies"></div>
+            
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
+                        <div class="anim-element glass-panel">
+                            <div class="chapter-number">08</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #ff6464; letter-spacing: 4px; font-size: 1.1rem;">The Aviators</span>
+                            <h2 class="chapter-title">Canopy Kings</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Look up to the highest branches. A kaleidoscope of colors flashes through the leaves as the vibrant kings of the canopy take flight in a display of unmatched aerial agility.</p>
                             
-                            <div class="mt-4">
-                                 <a href="{{ route('home') }}" class="btn-zoo bg-plum text-white text-decoration-none shadow-lg px-5 py-3 fs-5 fw-bold rounded-pill">Complete Your Journey</a>
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/macaw_360.png') }}" data-title="Canopy Kings">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 9: FOREST GIANTS (RIGHT Card) -->
+        <section class="chapter-section position-relative" id="chapter-9" style="--glow-color: rgba(180, 220, 255, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; right: 0; left: auto;">
+                <img src="{{ asset('images/placeholders/bear.png?v=2') }}" class="chapter-bg-img" alt="Bear">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="snow"></div>
+            
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-end position-relative z-2 px-0">
+                <div class="row w-100 m-0 justify-content-end">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 me-md-5">
+                        <div class="anim-element glass-panel">
+                            <div class="chapter-number">09</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #b4dcff; letter-spacing: 4px; font-size: 1.1rem;">The Untamed</span>
+                            <h2 class="chapter-title">Forest Giants</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Wander through the frozen northern pine forests. Meet the undisputed masters of the wilderness, built for power, endurance, and solitary reign over vast territories.</p>
+                            
+                            <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/bear_360.png') }}" data-title="Forest Giants">
+                                <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 10: DESERT DRAGONS (LEFT Card) -->
+        <section class="chapter-section position-relative" id="chapter-10" style="--glow-color: rgba(255, 150, 50, 0.5);">
+            <div class="bg-wrapper anim-bg" style="width: 130vw; left: 0; right: auto;">
+                <img src="{{ asset('images/placeholders/komodo.png?v=2') }}" class="chapter-bg-img" alt="Komodo Dragon">
+            </div>
+            <div class="position-absolute w-100 h-100 z-1" style="background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%); pointer-events: none;"></div>
+            <div class="position-absolute w-100 h-100 z-1 vignette"></div>
+            <div class="bg-particles" data-type="dust"></div>
+            
+            <div class="container-fluid h-100 d-flex align-items-center position-relative z-2 px-0">
+                <div class="row w-100 m-0">
+                    <div class="col-12 col-xl-5 px-4 px-md-5 ms-md-5">
+                        <div class="anim-element glass-panel">
+                            <div class="chapter-number">10</div>
+                            <span class="text-uppercase fw-bold mb-3 d-block" style="color: #ff9632; letter-spacing: 4px; font-size: 1.1rem;">Living Relics</span>
+                            <h2 class="chapter-title">Desert Dragons</h2>
+                            <p class="fs-4 text-white-50 mb-5 lh-lg fw-light">Step into the harsh, arid landscapes where prehistoric survivors still rule. Come face to face with the true dragons of the modern world in their unforgiving domain.</p>
+                            
+                            <div class="d-flex gap-4 mt-5 flex-wrap">
+                                <button class="panorama-btn trigger-habitat" data-url="{{ asset('images/tour/komodo_360.png') }}" data-title="Desert Dragons">
+                                    <i class="fa-solid fa-vr-cardboard"></i> Enter Habitat
+                                </button>
+                                <a href="{{ route('home') }}" class="panorama-btn" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                                    <i class="fa-solid fa-flag-checkered"></i> Complete
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -507,10 +658,16 @@
 
     <!-- 360 Panorama Overlay -->
     <div id="panorama-overlay">
-        <i class="fa-solid fa-xmark close-panorama" onclick="closePanorama()"></i>
-        <h2 id="panorama-title" class="marker-title text-white mb-4" style="font-size: 3rem;"></h2>
+        <div class="close-panorama" id="close-panorama-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <h2 id="panorama-title" class="chapter-title mb-0"></h2>
         <div id="panorama-container"></div>
-        <p class="text-white-50 mt-3"><i class="fa-solid fa-mouse me-2"></i>Drag to explore the habitat in 360°</p>
+        <!-- Drag to Explore Visual Indicator Overlay -->
+        <div id="drag-indicator" style="position: absolute; pointer-events: none; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.65); color: white; padding: 2rem; border-radius: 50%; width: 160px; height: 160px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); transition: opacity 0.8s ease; z-index: 10; opacity: 0; display: none;">
+            <i class="fa-solid fa-hand-pointer mb-3" style="font-size: 3rem; color: #fff; animation: float-firefly 2s infinite ease-in-out;"></i>
+            <span style="font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-align: center; line-height: 1.4;">Drag to<br>Explore</span>
+        </div>
     </div>
 
     <!-- GSAP Scripts -->
@@ -518,45 +675,425 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
+        // Web Audio Ambience Synthesizer
+        class SoundscapeGenerator {
+            constructor() {
+                this.ctx = null;
+                this.nodes = [];
+                this.chirpInterval = null;
+                this.cricketInterval = null;
+            }
+
+            start(type) {
+                this.stop();
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return;
+                    this.ctx = new AudioContext();
+                    
+                    if (type === 'wind') {
+                        this.playWind();
+                    } else if (type === 'rainforest') {
+                        this.playRainforest();
+                    } else if (type === 'ocean') {
+                        this.playOcean();
+                    } else if (type === 'wildlife') {
+                        this.playWildlife();
+                    }
+                } catch(e) {
+                    console.error('Audio generation failed', e);
+                }
+            }
+
+            stop() {
+                if (this.chirpInterval) { clearInterval(this.chirpInterval); this.chirpInterval = null; }
+                if (this.cricketInterval) { clearInterval(this.cricketInterval); this.cricketInterval = null; }
+                if (this.nodes) {
+                    this.nodes.forEach(node => {
+                        try { node.stop(); } catch (e) {}
+                        try { node.disconnect(); } catch (e) {}
+                    });
+                }
+                if (this.ctx && this.ctx.state !== 'closed') { this.ctx.close(); }
+                this.nodes = [];
+                this.ctx = null;
+            }
+
+            createNoiseBuffer() {
+                const bufferSize = 2 * this.ctx.sampleRate;
+                const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
+                return noiseBuffer;
+            }
+
+            playWind() {
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = this.createNoiseBuffer();
+                noise.loop = true;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'bandpass'; filter.Q.value = 3.0;
+                const lfo = this.ctx.createOscillator();
+                lfo.frequency.value = 0.08;
+                const lfoGain = this.ctx.createGain();
+                lfoGain.gain.value = 350;
+                lfo.connect(lfoGain); lfoGain.connect(filter.frequency);
+                filter.frequency.value = 600;
+                const gainNode = this.ctx.createGain();
+                gainNode.gain.value = 0.12;
+                noise.connect(filter); filter.connect(gainNode); gainNode.connect(this.ctx.destination);
+                lfo.start(); noise.start();
+                this.nodes.push(noise, lfo);
+            }
+
+            playOcean() {
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = this.createNoiseBuffer();
+                noise.loop = true;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'lowpass'; filter.frequency.value = 400;
+                const lfo = this.ctx.createOscillator(); lfo.frequency.value = 0.12;
+                const lfoGain = this.ctx.createGain(); lfoGain.gain.value = 0.06;
+                const gainNode = this.ctx.createGain(); gainNode.gain.value = 0.08;
+                lfo.connect(lfoGain); lfoGain.connect(gainNode.gain);
+                noise.connect(filter); filter.connect(gainNode); gainNode.connect(this.ctx.destination);
+                lfo.start(); noise.start();
+                this.nodes.push(noise, lfo);
+            }
+
+            playRainforest() {
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = this.createNoiseBuffer();
+                noise.loop = true;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'highpass'; filter.frequency.value = 1000;
+                const gainNode = this.ctx.createGain(); gainNode.gain.value = 0.03;
+                noise.connect(filter); filter.connect(gainNode); gainNode.connect(this.ctx.destination);
+                noise.start(); this.nodes.push(noise);
+                this.chirpInterval = setInterval(() => { this.triggerJungleChirp(); }, 3000);
+            }
+
+            triggerJungleChirp() {
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                osc.type = 'sine'; const startFreq = 2000 + Math.random() * 1500;
+                osc.frequency.setValueAtTime(startFreq, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(startFreq + 500, this.ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.015, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.25);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(); osc.stop(this.ctx.currentTime + 0.26);
+            }
+
+            playWildlife() {
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = this.createNoiseBuffer(); noise.loop = true;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'bandpass'; filter.frequency.value = 2500; filter.Q.value = 2.0;
+                const gainNode = this.ctx.createGain(); gainNode.gain.value = 0.01;
+                noise.connect(filter); filter.connect(gainNode); gainNode.connect(this.ctx.destination);
+                noise.start(); this.nodes.push(noise);
+                this.cricketInterval = setInterval(() => { this.triggerCricketChirp(); }, 1800);
+            }
+
+            triggerCricketChirp() {
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+                for (let i = 0; i < 4; i++) {
+                    const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                    osc.type = 'triangle'; osc.frequency.value = 4200 + i * 50;
+                    const pulseStart = now + i * 0.05;
+                    gain.gain.setValueAtTime(0, pulseStart);
+                    gain.gain.linearRampToValueAtTime(0.005, pulseStart + 0.01);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, pulseStart + 0.04);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(pulseStart); osc.stop(pulseStart + 0.05);
+                }
+            }
+        }
+
+        window.soundscape = new SoundscapeGenerator();
+        window.viewer = null;
+
+        function openPanorama(imageUrl, title) {
+            try {
+                const overlay = document.getElementById('panorama-overlay');
+                const titleElem = document.getElementById('panorama-title');
+                const container = document.getElementById('panorama-container');
+                
+                if(!overlay || !container) {
+                    console.error("Panorama containers missing");
+                    return;
+                }
+
+                // Force visibility
+                titleElem.innerText = title;
+                overlay.style.display = 'flex';
+                overlay.style.opacity = '1';
+                overlay.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'hidden';
+
+                if (window.viewer) {
+                    try { window.viewer.destroy(); } catch(e){}
+                    window.viewer = null;
+                }
+
+                // Ensure pannellum is loaded
+                if (typeof pannellum === 'undefined') {
+                    titleElem.innerText = "Error: 360 Viewer library failed to load.";
+                    return;
+                }
+
+                const dragIndicator = document.getElementById('drag-indicator');
+                if (dragIndicator) {
+                    dragIndicator.style.opacity = '1';
+                    dragIndicator.style.display = 'flex';
+                    
+                    const fadeOut = () => {
+                        dragIndicator.style.opacity = '0';
+                        setTimeout(() => { dragIndicator.style.display = 'none'; }, 800);
+                        container.removeEventListener('mousedown', fadeOut);
+                        container.removeEventListener('touchstart', fadeOut);
+                    };
+                    
+                    const autoFadeTimeout = setTimeout(fadeOut, 3500);
+                    container.addEventListener('mousedown', () => { clearTimeout(autoFadeTimeout); fadeOut(); });
+                    container.addEventListener('touchstart', () => { clearTimeout(autoFadeTimeout); fadeOut(); });
+                }
+
+                window.viewer = pannellum.viewer('panorama-container', {
+                    "type": "equirectangular",
+                    "panorama": imageUrl,
+                    "autoLoad": true,
+                    "compass": false,
+                    "showZoomCtrl": false,
+                    "mouseZoom": false,
+                    "friction": 0.15,
+                    "autoRotate": -1.5
+                });
+
+                // Start ambient sound based on title
+                let sound = 'rainforest';
+                if (['Golden Plains', 'The Silverback', 'Desert Dragons'].includes(title)) sound = 'wildlife';
+                else if (['Frozen Expanse', 'High Peaks'].includes(title)) sound = 'wind';
+                else if (title === 'Ocean Depths') sound = 'ocean';
+                
+                if (window.soundscape) {
+                    window.soundscape.start(sound);
+                }
+            } catch (err) {
+                console.error("Failed to open panorama:", err);
+                const titleElem = document.getElementById('panorama-title');
+                if (titleElem) titleElem.innerText = "Error: Failed to load habitat.";
+            }
+        }
+
+        function closePanorama() {
+            const overlay = document.getElementById('panorama-overlay');
+            if(overlay) {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    overlay.style.pointerEvents = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    if (window.viewer) {
+                        try { window.viewer.destroy(); } catch(e){}
+                        window.viewer = null;
+                    }
+                }, 500);
+            }
+
+            if (window.soundscape) {
+                window.soundscape.stop();
+            }
+
+            const dragIndicator = document.getElementById('drag-indicator');
+            if (dragIndicator) {
+                dragIndicator.style.opacity = '0';
+                dragIndicator.style.display = 'none';
+            }
+        }
+
+        // Use global event delegation to guarantee click capture regardless of DOM depth/overlays
+        document.body.addEventListener('click', function(e) {
+            // Check if click was on a habitat trigger or inside it
+            const habitatBtn = e.target.closest('.trigger-habitat');
+            if (habitatBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const url = habitatBtn.getAttribute('data-url');
+                const title = habitatBtn.getAttribute('data-title');
+                openPanorama(url, title);
+            }
+            
+            // Check if click was on the close button
+            const closeBtn = e.target.closest('#close-panorama-btn');
+            if (closeBtn) {
+                e.preventDefault();
+                closePanorama();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
 
-            // 1. HERO SECTION
-            gsap.from('.anim-hero', {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-
-            gsap.to('.anim-hero', {
-                y: -100,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: "#hero",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
+            // Generate Particles for each container
+            document.querySelectorAll('.bg-particles').forEach(container => {
+                const type = container.dataset.type;
+                const count = type === 'snow' ? 50 : type === 'fireflies' ? 35 : type === 'bubbles' ? 40 : 30;
+                for(let i=0; i<count; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.top = Math.random() * 100 + '%';
+                    
+                    const size = 3 + Math.random() * 6;
+                    p.style.width = size + 'px';
+                    p.style.height = size + 'px';
+                    
+                    if (type === 'fireflies') {
+                        p.style.background = 'rgba(173, 255, 47, ' + (0.4 + Math.random() * 0.6) + ')';
+                        p.style.boxShadow = '0 0 12px rgba(173, 255, 47, 0.9)';
+                        p.style.animation = `float-firefly ${4 + Math.random() * 6}s infinite ease-in-out`;
+                    } else if (type === 'snow') {
+                        p.style.background = 'rgba(255, 255, 255, ' + (0.5 + Math.random() * 0.5) + ')';
+                        p.style.animation = `float-snow ${3 + Math.random() * 5}s infinite linear`;
+                    } else if (type === 'bubbles') {
+                        p.style.background = 'transparent';
+                        p.style.border = '2px solid rgba(0, 240, 255, ' + (0.4 + Math.random() * 0.4) + ')';
+                        p.style.boxShadow = 'inset 0 0 6px rgba(0, 240, 255, 0.6)';
+                        p.style.animation = `float-bubble ${5 + Math.random() * 7}s infinite linear`;
+                    } else if (type === 'dust') {
+                        p.style.background = 'rgba(244, 180, 26, ' + (0.3 + Math.random() * 0.5) + ')';
+                        p.style.boxShadow = '0 0 8px rgba(244, 180, 26, 0.6)';
+                        p.style.animation = `float-dust ${6 + Math.random() * 8}s infinite ease-in-out`;
+                    }
+                    
+                    p.style.animationDelay = (Math.random() * -10) + 's';
+                    container.appendChild(p);
                 }
             });
 
-            // 2. CHAPTER SECTIONS
+            // PRELOADER LOGIC
+            const images = Array.from(document.querySelectorAll('.chapter-bg-img'));
+            let loadedImages = 0;
+            const totalImages = images.length;
+            
+            function updateProgress() {
+                loadedImages++;
+                const percent = Math.floor((loadedImages / totalImages) * 100);
+                const bar = document.getElementById('loader-bar');
+                const text = document.getElementById('loader-percent');
+                if(bar) bar.style.width = percent + '%';
+                if(text) text.innerText = percent;
+                
+                if (loadedImages >= totalImages) {
+                    showEnterButton();
+                }
+            }
+
+            function showEnterButton() {
+                setTimeout(() => {
+                    gsap.to(['#loader-container', '#loader-text'], { 
+                        opacity: 0, 
+                        duration: 0.5, 
+                        onComplete: () => {
+                            const container = document.getElementById('loader-container');
+                            const text = document.getElementById('loader-text');
+                            if(container) container.style.display = 'none';
+                            if(text) text.style.display = 'none';
+                            
+                            const btn = document.getElementById('enter-btn');
+                            if(btn) {
+                                btn.style.display = 'inline-flex';
+                                gsap.to(btn, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" });
+                            }
+                        }
+                    });
+                }, 400);
+            }
+
+            if (totalImages === 0) {
+                showEnterButton();
+            } else {
+                images.forEach(img => {
+                    if (img.complete) {
+                        updateProgress();
+                    } else {
+                        img.addEventListener('load', updateProgress);
+                        img.addEventListener('error', updateProgress); 
+                    }
+                });
+            }
+
+            // ENTER BUTTON CLICK LOGIC
+            const mainEnterBtn = document.getElementById('enter-btn');
+            if(mainEnterBtn) {
+                mainEnterBtn.addEventListener('click', () => {
+                    try {
+                        const AudioContext = window.AudioContext || window.webkitAudioContext;
+                        if (AudioContext) {
+                            const tempCtx = new AudioContext();
+                            tempCtx.resume();
+                        }
+                    } catch(e) {}
+
+                    gsap.to('#preloader', {
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            const preloader = document.getElementById('preloader');
+                            if(preloader) preloader.style.display = 'none';
+                            document.body.classList.remove('no-scroll');
+                            
+                            const contentWrap = document.getElementById('hero-content-wrapper');
+                            const scrollInd = document.getElementById('scroll-indicator');
+                            if(contentWrap) contentWrap.style.opacity = 1;
+                            if(scrollInd) scrollInd.style.opacity = 1;
+
+                            gsap.from('.anim-hero', {
+                                y: 80,
+                                opacity: 0,
+                                duration: 1.5,
+                                stagger: 0.2,
+                                ease: "power4.out"
+                            });
+
+                            gsap.to('.anim-hero', {
+                                y: -200,
+                                opacity: 0,
+                                scrollTrigger: {
+                                    trigger: "#hero",
+                                    start: "top top",
+                                    end: "bottom top",
+                                    scrub: 1
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // 2. CHAPTER SECTIONS SCROLL TRIGGERS
             const chapters = document.querySelectorAll('.chapter-section');
 
             chapters.forEach((section, index) => {
                 const elements = section.querySelectorAll('.anim-element');
                 const bg = section.querySelector('.anim-bg');
 
-                // A. Independent fade-in for elements (NOT scrubbed)
+                const isRightCard = section.querySelector('.justify-content-end') !== null;
+                const xOffset = isRightCard ? 150 : -150;
+
                 gsap.fromTo(elements, 
-                    { y: 50, autoAlpha: 0 }, 
+                    { x: xOffset, autoAlpha: 0 }, 
                     { 
-                        y: 0, 
+                        x: 0, 
                         autoAlpha: 1, 
-                        duration: 0.8, 
-                        stagger: 0.1, 
-                        ease: "power2.out",
+                        duration: 1.5, 
+                        ease: "power4.out",
                         scrollTrigger: {
                             trigger: section,
                             start: "top 70%",
@@ -565,77 +1102,27 @@
                     }
                 );
 
-                // B. The Scrubbed Pinning Timeline
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: section,
                         start: "top top",
-                        end: "+=120%", // Keeps the section pinned exactly 1 viewport height + 20%
+                        end: "+=200%", 
                         pin: true,
-                        pinSpacing: index === chapters.length - 1 ? true : false, // Creates the full-screen slide over effect
+                        pinSpacing: false,
                         scrub: 1,
                         anticipatePin: 1
                     }
                 });
 
-                // Subtle background scale-down effect
-                tl.to(bg, {
-                    scale: 1, // Scale from 1.15 to 1.0
-                    duration: 2,
-                    ease: "none"
-                }, 0);
-
-                // WE COMPLETELY REMOVED THE TEXT FADE OUT
-                // This means the text stays firmly on the screen while the section is pinned.
-                // When you scroll, the next section slides perfectly over the current one,
-                // guaranteeing that at any given moment, the screen is covered with content!
-            });
-            
-            // Add bounce animation to scroll indicator
-            gsap.to('#scroll-indicator i', {
-                y: 10,
-                repeat: -1,
-                yoyo: true,
-                duration: 1,
-                ease: "power1.inOut"
+                if(bg) {
+                    tl.to(bg, {
+                        scale: 1.05,
+                        duration: 2,
+                        ease: "none"
+                    }, 0);
+                }
             });
         });
-
-        // 360 Panorama Logic
-        let viewer = null;
-
-        function openPanorama(imageUrl, title) {
-            const overlay = document.getElementById('panorama-overlay');
-            const titleElem = document.getElementById('panorama-title');
-            
-            titleElem.innerText = title;
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-
-            if (viewer) {
-                viewer.destroy();
-            }
-
-            viewer = pannellum.viewer('panorama-container', {
-                "type": "equirectangular",
-                "panorama": imageUrl,
-                "autoLoad": true,
-                "compass": true,
-                "showZoomCtrl": true,
-                "mouseZoom": false
-            });
-        }
-
-        function closePanorama() {
-            const overlay = document.getElementById('panorama-overlay');
-            overlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            if (viewer) {
-                viewer.destroy();
-                viewer = null;
-            }
-        }
     </script>
 </body>
 </html>

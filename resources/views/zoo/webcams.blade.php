@@ -14,7 +14,7 @@
             <div class="cam-card">
                 <div class="cam-viewport ratio ratio-16x9">
                     <!-- Verified Embeddable Stream -->
-                    <iframe src="https://www.youtube.com/embed/ydYDqZQpim8?autoplay=1&mute=1&modestbranding=1&rel=0" 
+                    <iframe src="https://www.youtube.com/embed/ru0_t4H1TLA?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=ru0_t4H1TLA" 
                             title="African Wildlife" frameborder="0" loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     
@@ -72,7 +72,7 @@
             <div class="cam-card">
                 <div class="cam-viewport ratio ratio-16x9">
                     <!-- Verified Embeddable Stream -->
-                    <iframe src="https://www.youtube.com/embed/Bdc7YYAUoEo?autoplay=1&mute=1&modestbranding=1&rel=0" 
+                    <iframe src="https://www.youtube.com/embed/DGLU6Rz1TDA?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=DGLU6Rz1TDA" 
                             title="Grizzly Bears" frameborder="0" loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     
@@ -125,7 +125,7 @@
             <div class="cam-card">
                 <div class="cam-viewport ratio ratio-16x9">
                     <!-- Verified Embeddable Stream -->
-                    <iframe src="https://www.youtube.com/embed/UKkc40WQm0c?autoplay=1&mute=1&modestbranding=1&rel=0" 
+                    <iframe src="https://www.youtube.com/embed/YdP2fFyjBWQ?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=YdP2fFyjBWQ" 
                             title="Giant Panda" frameborder="0" loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     
@@ -178,7 +178,7 @@
             <div class="cam-card">
                 <div class="cam-viewport ratio ratio-16x9">
                     <!-- Verified Embeddable Stream -->
-                    <iframe src="https://www.youtube.com/embed/YT7lH6U68S4?autoplay=1&mute=1&modestbranding=1&rel=0" 
+                    <iframe src="https://www.youtube.com/embed/EFk6S8R_p6Y?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=EFk6S8R_p6Y" 
                             title="Shark Lagoon" frameborder="0" loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     
@@ -222,6 +222,217 @@
                 <div class="cam-info p-4">
                     <h3 class="marker-title text-teal fs-2 mb-2">Pacific Shark Lagoon</h3>
                     <p class="text-muted mb-0">Underwater monitoring station for Sand Tiger, Zebra, and Blacktip Reef Sharks.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Webcam Card 5: Gorillas -->
+        <div class="col-lg-6" data-aos="zoom-in">
+            <div class="cam-card">
+                <div class="cam-viewport ratio ratio-16x9">
+                    <!-- Verified Embeddable Stream -->
+                    <iframe src="https://www.youtube.com/embed/MpiHQUCT1Cc?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=MpiHQUCT1Cc" 
+                            title="Grace Gorillas" frameborder="0" loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    
+                    <div class="cctv-overlay">
+                        <div class="vignette"></div>
+                        <div class="scanline"></div>
+                        <div class="digital-noise"></div>
+                        
+                        <div class="overlay-top d-flex justify-content-between w-100 p-4">
+                            <div class="live-indicator">
+                                <span class="pulse-red"></span>
+                                <span class="status-text">LIVE</span>
+                            </div>
+                            <div class="cam-data font-monospace">
+                                CAM-05 / <span id="clock-5"></span>
+                            </div>
+                        </div>
+
+                        <div class="overlay-bottom d-flex justify-content-between align-items-end w-100 p-4">
+                            <div class="location-data">
+                                <div class="loc-coord">1.2583° S, 29.2319° E</div>
+                                <div class="loc-name">GRACE GORILLAS, DR CONGO</div>
+                            </div>
+                            <div class="signal-ui d-flex gap-3 align-items-center">
+                                <div class="viewer-count">
+                                    <i class="fa-solid fa-users me-1"></i> <span class="v-count">4.1K</span>
+                                </div>
+                                <div class="signal-bars">
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fullscreen-btn">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cam-info p-4">
+                    <h3 class="marker-title text-teal fs-2 mb-2">Eastern Lowland Gorillas</h3>
+                    <p class="text-muted mb-0">Live feed from the GRACE Sanctuary. Watch these critically endangered primates interact in their forested habitat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Webcam Card 6: Penguin Habitat -->
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="cam-card">
+                <div class="cam-viewport ratio ratio-16x9">
+                    <!-- Verified Embeddable Stream -->
+                    <iframe src="https://www.youtube.com/embed/A9mbCNs47FI?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=A9mbCNs47FI" 
+                            title="Penguin Habitat" frameborder="0" loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    
+                    <div class="cctv-overlay">
+                        <div class="vignette"></div>
+                        <div class="scanline"></div>
+                        <div class="digital-noise"></div>
+                        
+                        <div class="overlay-top d-flex justify-content-between w-100 p-4">
+                            <div class="live-indicator">
+                                <span class="pulse-red"></span>
+                                <span class="status-text">LIVE</span>
+                            </div>
+                            <div class="cam-data font-monospace">
+                                CAM-06 / <span id="clock-6"></span>
+                            </div>
+                        </div>
+
+                        <div class="overlay-bottom d-flex justify-content-between align-items-end w-100 p-4">
+                            <div class="location-data">
+                                <div class="loc-coord">36.6183° N, 121.9015° W</div>
+                                <div class="loc-name">MONTEREY BAY AQUARIUM</div>
+                            </div>
+                            <div class="signal-ui d-flex gap-3 align-items-center">
+                                <div class="viewer-count">
+                                    <i class="fa-solid fa-users me-1"></i> <span class="v-count">3.4K</span>
+                                </div>
+                                <div class="signal-bars">
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fullscreen-btn">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cam-info p-4">
+                    <h3 class="marker-title text-teal fs-2 mb-2">African Penguin Cam</h3>
+                    <p class="text-muted mb-0">Underwater and surface monitoring of the active African Penguin colony. Watch their aerodynamic swimming.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Webcam Card 7: Elephant Sanctuary -->
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="cam-card">
+                <div class="cam-viewport ratio ratio-16x9">
+                    <!-- Verified Embeddable Stream -->
+                    <iframe src="https://www.youtube.com/embed/e1Ut_3NoYb8?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=e1Ut_3NoYb8" 
+                            title="Elephant Sanctuary" frameborder="0" loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    
+                    <div class="cctv-overlay">
+                        <div class="vignette"></div>
+                        <div class="scanline"></div>
+                        <div class="digital-noise"></div>
+                        
+                        <div class="overlay-top d-flex justify-content-between w-100 p-4">
+                            <div class="live-indicator">
+                                <span class="pulse-red"></span>
+                                <span class="status-text">LIVE</span>
+                            </div>
+                            <div class="cam-data font-monospace">
+                                CAM-07 / <span id="clock-7"></span>
+                            </div>
+                        </div>
+
+                        <div class="overlay-bottom d-flex justify-content-between align-items-end w-100 p-4">
+                            <div class="location-data">
+                                <div class="loc-coord">27.0435° S, 32.4287° E</div>
+                                <div class="loc-name">TEMBE ELEPHANT PARK, SA</div>
+                            </div>
+                            <div class="signal-ui d-flex gap-3 align-items-center">
+                                <div class="viewer-count">
+                                    <i class="fa-solid fa-users me-1"></i> <span class="v-count">5.1K</span>
+                                </div>
+                                <div class="signal-bars">
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fullscreen-btn">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cam-info p-4">
+                    <h3 class="marker-title text-teal fs-2 mb-2">Tembe Elephant Park</h3>
+                    <p class="text-muted mb-0">High-definition live feed of the world's largest African elephants gathering around a vital water source.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Webcam Card 8: Tropical Reef -->
+        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="600">
+            <div class="cam-card">
+                <div class="cam-viewport ratio ratio-16x9">
+                    <!-- Verified Embeddable Stream -->
+                    <iframe src="https://www.youtube.com/embed/843Rpqza_6o?autoplay=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=843Rpqza_6o" 
+                            title="Tropical Reef" frameborder="0" loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    
+                    <div class="cctv-overlay">
+                        <div class="vignette"></div>
+                        <div class="scanline"></div>
+                        <div class="digital-noise"></div>
+                        
+                        <div class="overlay-top d-flex justify-content-between w-100 p-4">
+                            <div class="live-indicator">
+                                <span class="pulse-red"></span>
+                                <span class="status-text">LIVE</span>
+                            </div>
+                            <div class="cam-data font-monospace">
+                                CAM-08 / <span id="clock-8"></span>
+                            </div>
+                        </div>
+
+                        <div class="overlay-bottom d-flex justify-content-between align-items-end w-100 p-4">
+                            <div class="location-data">
+                                <div class="loc-coord">21.2891° N, 157.8305° W</div>
+                                <div class="loc-name">HONOLULU REEF TRENCH</div>
+                            </div>
+                            <div class="signal-ui d-flex gap-3 align-items-center">
+                                <div class="viewer-count">
+                                    <i class="fa-solid fa-users me-1"></i> <span class="v-count">1.9K</span>
+                                </div>
+                                <div class="signal-bars">
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                    <div class="bar active"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fullscreen-btn">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cam-info p-4">
+                    <h3 class="marker-title text-teal fs-2 mb-2">Honolulu Tropical Reef</h3>
+                    <p class="text-muted mb-0">Deep ocean surveillance. Discover the mesmerizing colors and thriving biodiversity of this protected reef ecosystem.</p>
                 </div>
             </div>
         </div>
@@ -487,7 +698,7 @@
     function updateClocks() {
         const now = new Date();
         const timeString = now.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        for(let i=1; i<=4; i++) {
+        for(let i=1; i<=8; i++) {
             const el = document.getElementById('clock-' + i);
             if(el) el.textContent = timeString;
         }
